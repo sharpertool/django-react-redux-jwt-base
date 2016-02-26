@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if [ -f env.txt ];then
+    environment=`cat env.txt`
+else
+    echo "Please add your preferred virtualenv to env.txt"
+    echo ">> echo \"envname\" > env.txt"
+    exit 1
+
+fi
+
+source $WORKON_HOME/$environment/bin/activate
+
+pushd src >> /dev/null
+python manage.py "$@"
+popd >> /dev/null
+
